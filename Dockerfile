@@ -6,6 +6,6 @@ COPY ./ ./
 
 RUN apt-get update
 
-RUN go build -o server ./cmd/main.go
+RUN go build -o server ./main.go
 
 CMD ["./server"]

@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"regexp"
 	"time"
 )
 
@@ -21,6 +22,11 @@ func GetListOfMembers() []Member {
 }
 
 func AddMember(name, email string) {
+	fmt.Println(email)
+	emailRegex := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+	if ok := emailRegex.MatchString(email); !ok {
+		return
+	}
 	e, m, d := time.Now().Date()
 	date := fmt.Sprintf("%v %v %v", d, m, e)
 	Members = append(Members,
@@ -47,14 +53,14 @@ func index(w http.ResponseWriter, _ *http.Request) {
 
 func newMember(w http.ResponseWriter, r *http.Request) {
 	AddMember(r.PostFormValue("name"), r.PostFormValue("email"))
-	http.Redirect(w, r, "/index", http.StatusMovedPermanently)
+	http.Redirect(w, r, "/", http.StatusMovedPermanently)
 
 }
 
 func Handler(port string) {
 	http.HandleFunc("/status", status)
-	http.HandleFunc("/index", index)
-	http.HandleFunc("/index/new_member", newMember)
+	http.HandleFunc("/", index)
+	http.HandleFunc("/new_member", newMember)
 
 	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {

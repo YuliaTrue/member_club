@@ -11,7 +11,7 @@
 
         <div class="new-member-form">
             <h3>New member</h3>			
-			<form action="/v1/index/new_member" method="post" >
+			<form action="/new_member" method="post" >
 			
 				<div class="enter">
 					<label>Name:</label>
@@ -36,8 +36,6 @@
 			<tr>	<th>Name</th>	<th>Email</th>	<th>Registration date</th>	</tr>
 			{{ range . }}
 				<tr>	<td>{{ .Name }}</td>	<td>{{ .Email }}</td>	<td>{{ .Date }}</td>	</tr>
-			{{ else }}
-			<tr>	<b>Empty members</b>	</tr>
 			{{ end }}
 		</table>
 
