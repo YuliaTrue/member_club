@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Privat club</title>
+        <link href="index.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <h1 align="center">Welcome to the club</h1>
+
+        <div class="new-member-form">
+            <h3>New member</h3>			
+			<form action="/v1/index/new_member" method="post" >
+			
+				<div class="enter">
+					<label>Name:</label>
+					<input type="text" name="name">
+				</div>
+				
+				<div class="enter">
+					<label>Email:</label>
+					<input type="text" name="email">
+				</div>
+				
+				<div>
+					<input class="enter-btn" type="submit" value="Add">
+					<input class="enter-btn" type="reset" value="Clear">
+				</div>
+			</form>
+        </div>
+
+		<h2 align="center">Members</h2>
+
+		<table border="solid">
+			<tr>	<th>Name</th>	<th>Email</th>	<th>Registration date</th>	</tr>
+			{{ range . }}
+				<tr>	<td>{{ .Name }}</td>	<td>{{ .Email }}</td>	<td>{{ .Date }}</td>	</tr>
+			{{ else }}
+			<tr>	<b>Empty members</b>	</tr>
+			{{ end }}
+		</table>
+
+    </body>
+</html>

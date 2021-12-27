@@ -1,0 +1,15 @@
+.new-member-form{
+    margin-left: 50px;
+}
+h3 {
+	display: inline-block;
+}
+
+.enter{
+	margin-bottom: 1%;
+}
+
+.enter-btn{
+	margin-left: 45px;
+	margin-right: 45px;
+}
